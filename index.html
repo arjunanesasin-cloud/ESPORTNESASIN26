@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nesani E-Sport Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --main:#6c00ff;
+  --accent:#00ffd5;
+  --bg:#0b0b16;
+  --card:#15152a;
+  --text:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(120deg,#090015,#1b0033);
+  color:var(--text);
+}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:999;
+  background:rgba(10,10,25,.9);
+  backdrop-filter:blur(10px);
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  font-size:1.1rem;
+  color:var(--accent);
+}
+.logo img{
+  height:34px;
+  border-radius:6px;
+}
+nav a{
+  margin-left:15px;
+  color:#ddd;
+  text-decoration:none;
+  font-weight:500;
+}
+nav a:hover{color:var(--accent)}
+.cart-btn{
+  background:linear-gradient(90deg,#6c00ff,#00ffd5);
+  color:#000;
+  padding:6px 14px;
+  border-radius:20px;
+  font-weight:700;
+  cursor:pointer;
+  margin-left:10px;
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px 20px;
+  background:
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+    url("BANNER/sampul.jpg") center/cover no-repeat;
+}
+.hero h1{
+  font-size:2.4rem;
+  font-weight:800;
+  background:linear-gradient(90deg,#fff,#00ffd5);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero p{
+  margin-top:10px;
+  max-width:520px;
+  opacity:.9;
+}
+.hero button{
+  margin-top:22px;
+  padding:12px 24px;
+  border:none;
+  border-radius:30px;
+  font-weight:600;
+  background:linear-gradient(90deg,var(--main),var(--accent));
+  color:#000;
+  cursor:pointer;
+  box-shadow:0 0 20px #6c00ff88;
+}
+.hero button:hover{transform:scale(1.05)}
+
+/* ===== SECTION ===== */
+.section{
+  padding:60px 20px;
+  max-width:1200px;
+  margin:auto;
+}
+.section h2{
+  text-align:center;
+  margin-bottom:30px;
+  font-size:1.8rem;
+  color:var(--accent);
+}
+
+/* ===== PRODUCT GRID ===== */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:20px;
+}
+.card{
+  background:linear-gradient(160deg,#15152a,#0b0b16);
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 10px 30px #00000066;
+  transition:.4s;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 0 30px #6c00ff88;
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.card-body{
+  padding:14px;
+}
+.card h3{
+  font-size:.95rem;
+  margin-bottom:6px;
+}
+.price{
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+.card button{
+  width:100%;
+  padding:8px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#6c00ff,#00ffd5);
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+}
+.card button:hover{filter:brightness(1.2)}
+
+/* ===== IMAGE SLIDER ===== */
+.slider{
+  position:relative;
+}
+.slider img{display:none}
+.slider img.active{display:block}
+.slider .nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:28px;
+  height:28px;
+  cursor:pointer;
+}
+.slider .prev{left:6px}
+.slider .next{right:6px}
+
+/* ===== LOGIN ADMIN ===== */
+.admin-login{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(120deg,#050010,#120020);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:3000;
+}
+.admin-login.active{display:flex}
+.login-box{
+  background:#0e0e24;
+  border-radius:16px;
+  padding:24px;
+  width:90%;
+  max-width:360px;
+  box-shadow:0 0 40px #000;
+}
+.login-box h3{
+  text-align:center;
+  margin-bottom:16px;
+  color:var(--accent);
+}
+.login-box input{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  margin-bottom:10px;
+}
+.login-box button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#6c00ff,#00ffd5);
+  color:#000;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* ===== ADMIN PANEL ===== */
+.admin-panel{
+  display:none;
+  padding:30px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+.admin-panel.active{display:block}
+.admin-panel h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:var(--accent);
+}
+.admin-form{
+  background:#111127;
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.admin-form input{
+  padding:8px;
+  border-radius:8px;
+  border:none;
+  outline:none;
+}
+.admin-form input[type="file"]{
+  background:#000;
+  color:#aaa;
+}
+.admin-form button{
+  grid-column:span 2;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#6c00ff,#00ffd5);
+  font-weight:700;
+  cursor:pointer;
+}
+.admin-products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+.admin-card{
+  background:#111127;
+  border-radius:12px;
+  padding:10px;
+  box-shadow:0 0 20px #000;
+}
+.admin-card img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.admin-card h4{
+  font-size:.9rem;
+  margin:6px 0;
+}
+.admin-card p{
+  font-size:.8rem;
+  opacity:.8;
+}
+.admin-card button{
+  margin-top:6px;
+  width:100%;
+  border:none;
+  border-radius:10px;
+  padding:6px;
+  font-size:.75rem;
+  cursor:pointer;
+}
+.admin-card .edit{background:#00ffd5;color:#000}
+.admin-card .delete{background:#ff004c;color:#fff}
+
+/* ===== CART ===== */
+.cart-panel{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:100%;
+  max-width:360px;
+  height:100vh;
+  background:#0b0b20;
+  z-index:2500;
+  transition:.4s;
+  display:flex;
+  flex-direction:column;
+}
+.cart-panel.active{right:0}
+.cart-header{
+  padding:14px;
+  background:#070012;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.cart-header h3{color:var(--accent)}
+.cart-header button{
+  background:#ff004c;
+  border:none;
+  color:#fff;
+  border-radius:50%;
+  width:28px;
+  height:28px;
+  cursor:pointer;
+}
+.cart-items{
+  flex:1;
+  overflow:auto;
+  padding:10px;
+}
+.cart-item{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  background:#111127;
+  border-radius:10px;
+  padding:8px;
+}
+.cart-item img{
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.cart-item h4{
+  font-size:.8rem;
+}
+.cart-item p{
+  font-size:.75rem;
+  color:var(--accent);
+}
+.cart-item button{
+  background:#ff004c;
+  border:none;
+  color:#fff;
+  border-radius:6px;
+  padding:4px 6px;
+  font-size:.7rem;
+  cursor:pointer;
+}
+.cart-footer{
+  padding:12px;
+  background:#070012;
+}
+.cart-footer .total{
+  font-weight:700;
+  margin-bottom:10px;
+}
+.cart-footer button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#6c00ff,#00ffd5);
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:25px 15px;
+  background:#070012;
+  opacity:.8;
+  font-size:.85rem;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:480px){
+  .hero h1{font-size:1.7rem}
+  .admin-form{grid-template-columns:1fr}
+  .admin-form button{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+   <img id="siteLogo" src="LOGO/logonesasin.png" alt="Logo Nesani E-Sport">
+    <span id="siteName">Nesasin -Sport Shop</span>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#produk">Produk</a>
+    <a href="#kontak">Kontak</a>
+    <span class="cart-btn" onclick="openCart()">🛒 <span id="cartCount">0</span></span>
+    <a href="#" onclick="openAdminLogin()">Admin</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home"></section>
+
+<div class="hero-content" style="position:absolute;top:120px;left:50%;transform:translateX(-50%);text-align:center;z-index:2;">
+  <h1 style="font-size:2.4rem;font-weight:800;background:linear-gradient(90deg,#fff,#00ffd5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+    BERAKSI TEAM🔥
+  </h1>
+  <p style="margin-top:10px;max-width:520px;opacity:.9;">
+    all shop
+  </p>
+  <button style="margin-top:22px;padding:12px 24px;border:none;border-radius:30px;font-weight:600;background:linear-gradient(90deg,#6c00ff,#00ffd5);color:#000;cursor:pointer;box-shadow:0 0 20px #6c00ff88;"
+    onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">
+    Lihat Produk
+  </button>
+</div>
+
+<!-- PRODUK -->
+<section class="section" id="produk">
+  <h2>Produk Unggulan</h2>
+  <div class="products" id="productList"></div>
+</section>
+
+<!-- LOGIN ADMIN -->
+<div class="admin-login" id="adminLogin">
+  <div class="login-box">
+    <h3>Login Admin</h3>
+    <input type="text" id="adminUser" placeholder="Username">
+    <input type="password" id="adminPass" placeholder="Password">
+    <button onclick="loginAdmin()">Masuk</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<section class="admin-panel" id="adminPanel">
+  <h2>Admin Dashboard</h2>
+
+  <!-- LOGO CMS -->
+  <div class="admin-form" style="grid-template-columns:1fr;">
+    <h3 style="color:#00ffd5">Ganti Logo Website</h3>
+    <input type="file" id="logoInput" accept="image/*">
+    <button onclick="saveLogo()">Simpan Logo</button>
+  </div>
+
+  <!-- COVER CMS -->
+  <div class="admin-form" style="grid-template-columns:1fr;">
+    <h3 style="color:#00ffd5">Ganti Sampul / Banner</h3>
+    <input type="file" id="coverInput" accept="image/*">
+    <button onclick="saveCover()">Simpan Sampul</button>
+  </div>
+
+  <div class="admin-form">
+    <input type="text" id="pName" placeholder="Nama Produk">
+    <input type="number" id="pPrice" placeholder="Harga">
+    <input type="file" id="pImgs" multiple accept="image/*">
+    <input type="hidden" id="editIndex">
+    <button onclick="saveProduct()">Simpan Produk</button>
+  </div>
+
+  <div class="admin-products" id="adminProducts"></div>
+
+  <button style="margin-top:20px;width:100%;background:#333;color:#fff;border:none;border-radius:20px;padding:10px" onclick="logoutAdmin()">Logout Admin</button>
+</section>
+
+<!-- CART -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>Keranjang</h3>
+    <button onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="total">Total: Rp <span id="cartTotal">0</span></div>
+    <button onclick="checkout()">Checkout via WhatsApp</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="kontak">
+  © 2026 Nesani E-Sport Shop • WhatsApp: 08xxxxxxxxxx • Instagram: @nesaniesport
+</footer>
+
+<script>
+/* ================== LOGO ================== */
+const logoImg=document.getElementById("siteLogo");
+const savedLogo=localStorage.getItem("siteLogo");
+if(savedLogo) logoImg.src=savedLogo;
+
+function saveLogo(){
+  const file=document.getElementById("logoInput").files[0];
+  if(!file){
+    alert("Pilih logo dulu!");
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=e=>{
+    logoImg.src=e.target.result;
+    localStorage.setItem("siteLogo",e.target.result);
+    alert("Logo berhasil diganti ✅");
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ================== COVER ================== */
+const hero=document.querySelector(".hero");
+const savedCover=localStorage.getItem("siteCover");
+if(savedCover){
+  hero.style.background=`linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)), url('${savedCover}') center/cover no-repeat`;
+}
+
+function saveCover(){
+  const file=document.getElementById("coverInput").files[0];
+  if(!file){
+    alert("Pilih gambar sampul dulu!");
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=e=>{
+    hero.style.background=`linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)), url('${e.target.result}') center/cover no-repeat`;
+    localStorage.setItem("siteCover",e.target.result);
+    alert("Sampul berhasil diganti ✅");
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ================== DATA ================== */
+const defaultProducts=[
+  {name:"Mouse Gaming RGB",price:85000,imgs:["GAME/outpit game (10).jpg"]},
+  {name:"Keyboard Mechanical Blue Switch",price:275000,imgs:["GAME/outpit game (10).jpg"]},
+  {name:"Headset Gaming 7.1",price:195000,imgs:["GAME/outpit game (10).jpg"]},
+  {name:"Mousepad XL RGB",price:65000,imgs:["GAME/outpit game (10).jpg"]},
+  {name:"Jersey E-Sport Custom",price:125000,imgs:["GAME/outpit game (10).jpg"]},
+  {name:"Controller Wireless Gamepad",price:175000,imgs:["GAME/outpit game (10).jpg"]}
+];
+
+let products=JSON.parse(localStorage.getItem("products"))||defaultProducts;
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+
+/* ================== ELEMENT ================== */
+const productList=document.getElementById("productList");
+const adminLoginBox=document.getElementById("adminLogin");
+const adminPanel=document.getElementById("adminPanel");
+const adminProducts=document.getElementById("adminProducts");
+const cartPanel=document.getElementById("cartPanel");
+const cartItemsBox=document.getElementById("cartItems");
+const cartTotalBox=document.getElementById("cartTotal");
+const cartCountBox=document.getElementById("cartCount");
+
+/* ================== STORE FRONT ================== */
+function renderProducts(){
+  productList.innerHTML="";
+  products.forEach((p,i)=>{
+    const div=document.createElement("div");
+    div.className="card";
+
+    let sliderImgs="";
+    p.imgs.forEach((img,j)=>{
+      sliderImgs+=`<img src="${img}" class="${j===0?'active':''}">`;
+    });
+
+    div.innerHTML=`
+      <div class="slider" data-index="0" data-prod="${i}">
+        ${sliderImgs}
+        ${p.imgs.length>1?`
+          <button class="nav prev" onclick="slideImg(${i},-1)">‹</button>
+          <button class="nav next" onclick="slideImg(${i},1)">›</button>
+        `:""}
+      </div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <div class="price">Rp${p.price.toLocaleString()}</div>
+        <button onclick="addToCart(${i})">Tambah ke Keranjang</button>
+      </div>
+    `;
+    productList.appendChild(div);
+  });
+}
+
+/* ===== IMAGE SLIDER ===== */
+function slideImg(prodIndex,dir){
+  const slider=document.querySelector(`.slider[data-prod="${prodIndex}"]`);
+  const imgs=slider.querySelectorAll("img");
+  let idx=parseInt(slider.dataset.index);
+  imgs[idx].classList.remove("active");
+  idx=(idx+dir+imgs.length)%imgs.length;
+  imgs[idx].classList.add("active");
+  slider.dataset.index=idx;
+}
+
+/* ================== CART ================== */
+function openCart(){
+  cartPanel.classList.add("active");
+  renderCart();
+}
+function closeCart(){
+  cartPanel.classList.remove("active");
+}
+
+function addToCart(i){
+  cart.push({...products[i], qty:1});
+  saveCart();
+  updateCartCount();
+  alert("Produk ditambahkan ke keranjang 🛒");
+}
+
+function removeFromCart(i){
+  cart.splice(i,1);
+  saveCart();
+  renderCart();
+  updateCartCount();
+}
+
+function renderCart(){
+  cartItemsBox.innerHTML="";
+  let total=0;
+  cart.forEach((item,i)=>{
+    total+=item.price*item.qty;
+    const div=document.createElement("div");
+    div.className="cart-item";
+    div.innerHTML=`
+      <img src="${item.imgs[0]}">
+      <div style="flex:1">
+        <h4>${item.name}</h4>
+        <p>Rp${item.price.toLocaleString()}</p>
+      </div>
+      <button onclick="removeFromCart(${i})">✕</button>
+    `;
+    cartItemsBox.appendChild(div);
+  });
+  cartTotalBox.textContent=total.toLocaleString();
+}
+
+function checkout(){
+  if(cart.length===0){
+    alert("Keranjang masih kosong!");
+    return;
+  }
+  let text="Halo, saya ingin memesan:%0A";
+  cart.forEach(item=>{
+    text+=`- ${item.name} (Rp${item.price.toLocaleString()})%0A`;
+  });
+  text+=`%0ATotal: Rp${cartTotalBox.textContent}`;
+  window.open(`https://wa.me/628xxxxxxxxxx?text=${text}`,"_blank");
+}
+
+function updateCartCount(){
+  cartCountBox.textContent=cart.length;
+}
+
+/* ================== ADMIN ================== */
+function openAdminLogin(){
+  adminLoginBox.classList.add("active");
+}
+
+function loginAdmin(){
+  const u=document.getElementById("adminUser").value;
+  const p=document.getElementById("adminPass").value;
+  if(u==="admin" && p==="12345"){
+    adminLoginBox.classList.remove("active");
+    adminPanel.classList.add("active");
+    document.getElementById("home").style.display="none";
+    document.getElementById("produk").style.display="none";
+    renderAdminProducts();
+  }else{
+    alert("Login salah!");
+  }
+}
+
+function logoutAdmin(){
+  adminPanel.classList.remove("active");
+  document.getElementById("home").style.display="block";
+  document.getElementById("produk").style.display="block";
+}
+
+/* ===== CMS ADMIN ===== */
+function renderAdminProducts(){
+  adminProducts.innerHTML="";
+  products.forEach((p,i)=>{
+    const div=document.createElement("div");
+    div.className="admin-card";
+    div.innerHTML=`
+      <img src="${p.imgs[0]}">
+      <h4>${p.name}</h4>
+      <p>Rp${p.price.toLocaleString()}</p>
+      <button class="edit" onclick="editProduct(${i})">Edit</button>
+      <button class="delete" onclick="deleteProduct(${i})">Hapus</button>
+    `;
+    adminProducts.appendChild(div);
+  });
+}
+
+function saveProduct(){
+  const name=document.getElementById("pName").value;
+  const price=parseInt(document.getElementById("pPrice").value);
+  const files=document.getElementById("pImgs").files;
+  const editIndex=document.getElementById("editIndex").value;
+
+  if(!name||!price){
+    alert("Lengkapi nama & harga!");
+    return;
+  }
+
+  let imgs=[];
+  if(files.length>0){
+    let loaded=0;
+    for(let f of files){
+      const reader=new FileReader();
+      reader.onload=e=>{
+        imgs.push(e.target.result);
+        loaded++;
+        if(loaded===files.length){
+          finishSave(imgs);
+        }
+      };
+      reader.readAsDataURL(f);
+    }
+  }else{
+    if(editIndex!==""){
+      imgs=products[editIndex].imgs;
+      finishSave(imgs);
+    }else{
+      alert("Upload minimal 1 foto!");
+    }
+  }
+
+  function finishSave(imgArr){
+    if(editIndex===""){
+      products.push({name,price,imgs:imgArr});
+    }else{
+      products[editIndex]={name,price,imgs:imgArr};
+      document.getElementById("editIndex").value="";
+    }
+
+    document.getElementById("pName").value="";
+    document.getElementById("pPrice").value="";
+    document.getElementById("pImgs").value="";
+
+    saveProducts();
+    renderProducts();
+    renderAdminProducts();
+  }
+}
+
+function editProduct(i){
+  const p=products[i];
+  document.getElementById("pName").value=p.name;
+  document.getElementById("pPrice").value=p.price;
+  document.getElementById("editIndex").value=i;
+}
+
+function deleteProduct(i){
+  if(confirm("Hapus produk ini?")){
+    products.splice(i,1);
+    saveProducts();
+    renderProducts();
+    renderAdminProducts();
+  }
+}
+
+/* ================== STORAGE ================== */
+function saveProducts(){
+  localStorage.setItem("products",JSON.stringify(products));
+}
+function saveCart(){
+  localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+/* ================== INIT ================== */
+renderProducts();
+updateCartCount();
+</script>
+
+</body>
+</html>
